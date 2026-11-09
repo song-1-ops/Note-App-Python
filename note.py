@@ -6,15 +6,14 @@ from ttkbootstrap import Style
 
 # Create main window
 root = tk.Tk()
-root.title("Note App")
+root.title("随记")
 root.geometry("515x515")
 # Configure style
-style = Style(theme="journal")
-style = ttk.Style()
-
-
-# Configure font for tabs
+style = Style(theme="cosmo")
 style.configure("TNotebook.Tab", font=("TkDefaultFont", 14, "bold"))
+style.configure("info.TButton", background="#7b4d9e", foreground="white")
+style.configure("primary.TButton", background="#5b2c6f", foreground="white")
+style.configure("secondary.TButton", background="#a569bd", foreground="white")
 
 # Create Notebook
 notebook = ttk.Notebook(root, style="TNotebook")
@@ -36,16 +35,16 @@ def add_note():
 
     # Create frame for new note
     note_frame = ttk.Frame(notebook, padding=10)
-    notebook.add(note_frame, text="New Note")
+    notebook.add(note_frame, text="新建便签")
 
     # Widgets for note title and content
-    title_label = ttk.Label(note_frame, text="Title:")
+    title_label = ttk.Label(note_frame, text="标题:")
     title_label.grid(row=0, column=0, padx=10, pady=10, sticky="W")
 
     title_entry = ttk.Entry(note_frame, width=40)
     title_entry.grid(row=0, column=1, padx=10, pady=10)
 
-    content_label = ttk.Label(note_frame, text="Content:")
+    content_label = ttk.Label(note_frame, text="内容:")
     content_label.grid(row=1, column=0, padx=10, pady=10, sticky="W")
 
     content_entry = tk.Text(note_frame, width=40, height=10)
@@ -72,7 +71,7 @@ def add_note():
         notebook.add(note_content, text=title)
 
     # Save button
-    save_button = ttk.Button(note_frame, text="Save",
+    save_button = ttk.Button(note_frame, text="🐾 保存",
                              command=save_note, style="secondary.TButton")
     save_button.grid(row=2, column=0, padx=10, pady=10)
 
@@ -104,8 +103,8 @@ def delete_note():
     note_title = notebook.tab(current_tab, "text")
 
     # Confirm deletion
-    confirm = messagebox.askyesno("Delete Note",
-                                  f"Are you sure you want to delete {note_title}?")
+    confirm = messagebox.askyesno("删除便签",
+                                  f"确定要删除「{note_title}」吗？")
 
     if confirm:
         # Remove from notebook
@@ -119,11 +118,11 @@ def delete_note():
             json.dump(notes, f)
 
 # Buttons
-new_button = ttk.Button(root, text="New",
+new_button = ttk.Button(root, text="🐱 新建",
                         command=add_note, style="info.TButton")
 new_button.pack(side=tk.LEFT, padx=10, pady=10)
 
-delete_button = ttk.Button(root, text="Delete",
+delete_button = ttk.Button(root, text="🐶 删除",
                            command=delete_note, style="primary.TButton")
 delete_button.pack(side=tk.LEFT, padx=10, pady=10)
 

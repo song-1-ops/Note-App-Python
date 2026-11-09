@@ -57,6 +57,27 @@ The app was tested to run successfully with:
 - Python 3.13 (official Windows build, `py -3.13`)
 - ttkbootstrap 2.2.7
 
+## Build & Package
+
+To package the app into a standalone Windows executable (no Python required on the target machine):
+
+1. Install PyInstaller:
+
+   ```
+   pip install pyinstaller
+   ```
+
+2. Build the single-file executable:
+
+   ```
+   pyinstaller --onefile --windowed --name "随记" note.py
+   ```
+
+3. The executable will be generated at `dist/随记.exe` and can be double-clicked to run.
+
+   > Build artifacts (`build/`, `dist/`, `*.spec`, `*.exe`) are ignored by `.gitignore` and
+   > are distributed via GitHub Releases instead of the repository.
+
 ## License
 
 This project is licensed under the MIT license. See LICENSE for details.
